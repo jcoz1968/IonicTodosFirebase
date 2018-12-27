@@ -8,21 +8,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email: ['', Validators.compose([ Validators.required, Validators.email ])],
       password: ['', Validators.required]
     })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  loginSubmitForm() {
+    console.log(this.loginForm.value);
   }
 
-  loginSubmitForm() {
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
   }
 
 }
