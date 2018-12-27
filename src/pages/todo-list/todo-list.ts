@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DataProvider } from './../../providers/data/data';
 
 /**
  * Generated class for the TodoListPage page.
@@ -14,8 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'todo-list.html',
 })
 export class TodoListPage {
+  listsItems = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: DataProvider) {
+    this.listsItems = this.dataService.lists;
   }
 
   ionViewDidLoad() {
