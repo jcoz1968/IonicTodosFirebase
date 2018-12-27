@@ -1,17 +1,34 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import firebase from "firebase";
+import { User } from "@firebase/auth-types";
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
+  newUser: User = null;
+  constructor() { }
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
+  async signUpUser(
+    email: string,
+    firstname: string,
+    lastname: string,
+    password: string
+ ): Promise<any> {
+    try {
+
+      this.newUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      await firebase
+        .database()
+        .ref(`/userProfile/${this.newUser.uid}`)
+        .set({
+          email: email,
+          firstname: firstname,
+          lastname: lastname
+        });
+    } catch (err) {
+      throw err;
+    }
   }
-
 }
