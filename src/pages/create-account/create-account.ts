@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CreateAccountPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -14,12 +8,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'create-account.html',
 })
 export class CreateAccountPage {
+  registerForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private fb: FormBuilder) {
+    this.registerForm = this.fb.group({
+      fName: ['', Validators.compose([Validators.required, Validators.min(3), Validators.max(30)])],
+      lName: ['', Validators.compose([Validators.required, Validators.max(50), Validators.min(3)])],
+      email: ['', Validators.compose([ Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.min(6)])]
+    })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateAccountPage');
+  }
+
+  registerSubmit() {
+    console.log(this.registerForm.value);
   }
 
 }
