@@ -43,10 +43,15 @@ export class AuthProvider {
       console.log('Auth.ts Google');
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(res => {
-        var token = res.credential.accessToken;
-        console.log('token', token);
-        var user = res.user;
-        console.log('user', user);
+        // const token = res.credential.accessToken;
+        const user: User = res.user;
+        let splitName = user.displayName.split(' ');
+        firebase
+        .database()
+        .ref(`/userProfile/${user.uid}`)
+        .set({ email: user.email, firstname: splitName[0], lastname: splitName[1] });
+        return user;
+
       }).catch((error) => {
         console.log('error', error);
       });
