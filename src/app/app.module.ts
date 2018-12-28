@@ -7,6 +7,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
 import { AuthProvider } from "../providers/auth/auth";
+import {GooglePlus} from "@ionic-native/google-plus";
 
 @NgModule({
   declarations: [MyApp],
@@ -18,7 +19,8 @@ import { AuthProvider } from "../providers/auth/auth";
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
-    AuthProvider
+    AuthProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}

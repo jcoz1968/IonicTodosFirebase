@@ -1,3 +1,4 @@
+import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { User } from '@firebase/auth-types';
@@ -5,7 +6,7 @@ import { User } from '@firebase/auth-types';
 @Injectable()
 export class AuthProvider {
   newUser: User = null;
-  constructor() { }
+  constructor(private platform: Platform) { }
 
   async signUpUser(
     email: string,
@@ -33,6 +34,28 @@ export class AuthProvider {
 
   async loginUser(email: string, password: string) {
     return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+
+  async loginWithGoogle(): Promise<any> {
+    if (this.platform.is('cordova')) {
+      // if running in native mode
+    } else {
+      console.log('Auth.ts Google');
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider).then(res => {
+        // const token = res.credential.accessToken;
+        const user: User = res.user;
+        let splitName = user.displayName.split(' ');
+        firebase
+        .database()
+        .ref(`/userProfile/${user.uid}`)
+        .set({ email: user.email, firstname: splitName[0], lastname: splitName[1] });
+        return user;
+
+      }).catch((error) => {
+        console.log('error', error);
+      });
+    }
   }
 
   logoutUser(): Promise<any> {
