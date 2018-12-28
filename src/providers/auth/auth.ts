@@ -41,6 +41,15 @@ export class AuthProvider {
       // if running in native mode
     } else {
       console.log('Auth.ts Google');
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider).then(res => {
+        var token = res.credential.accessToken;
+        console.log('token', token);
+        var user = res.user;
+        console.log('user', user);
+      }).catch((error) => {
+        console.log('error', error);
+      });
     }
   }
 
