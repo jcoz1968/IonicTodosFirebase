@@ -7,7 +7,8 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
 import { AuthProvider } from "../providers/auth/auth";
-import {GooglePlus} from "@ionic-native/google-plus";
+import { GooglePlus } from "@ionic-native/google-plus";
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 @NgModule({
   declarations: [MyApp],
@@ -20,7 +21,8 @@ import {GooglePlus} from "@ionic-native/google-plus";
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
     AuthProvider,
-    GooglePlus
+    GooglePlus,
+    TwitterConnect
   ]
 })
 export class AppModule {}

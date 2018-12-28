@@ -44,6 +44,10 @@ export class HomePage {
     this.loading.present();
   }
 
+  twitterLogin(): void {
+    this.authService.loginWithTwitter();
+  }
+
   signUpUsers(): void {
     console.log('signup');
     this.navCtrl.push('CreateAccountPage');
