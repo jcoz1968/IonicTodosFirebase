@@ -1,8 +1,8 @@
-import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { User } from '@firebase/auth-types';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 @Injectable()
 export class AuthProvider {
@@ -57,6 +57,15 @@ export class AuthProvider {
         console.log('error', error);
       });
     }
+  }
+
+  async loginWithGitHub():Promise<any> {
+    const provider = new firebase.auth.GithubAuthProvider();
+    return firebase.auth().signInWithPopup(provider).then(result => {
+        return result.user;
+    }).catch(error => {
+        console.log(error);
+    })
   }
 
   async loginWithTwitter():Promise<any> {
