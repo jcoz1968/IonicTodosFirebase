@@ -14,7 +14,6 @@ export class AuthProvider {
     password: string
  ): Promise<any> {
     try {
-
       this.newUser = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password);
@@ -31,4 +30,19 @@ export class AuthProvider {
       throw err;
     }
   }
+
+  logoutUser(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      firebase.auth().signOut()
+        .then(() => {
+          let loggedOut = true;
+          resolve(loggedOut)
+        }).catch((err: any) => {
+          reject(err);
+        });
+    });
+  }
+
+
+
 }
