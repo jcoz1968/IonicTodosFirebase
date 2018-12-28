@@ -48,6 +48,10 @@ export class HomePage {
     this.authService.loginWithTwitter();
   }
 
+  githubLogin(): void {
+    this.authService.loginWithGitHub();
+  }
+
   signUpUsers(): void {
     console.log('signup');
     this.navCtrl.push('CreateAccountPage');
