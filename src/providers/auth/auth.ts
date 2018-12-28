@@ -31,6 +31,10 @@ export class AuthProvider {
     }
   }
 
+  async loginUser(email: string, password: string) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+
   logoutUser(): Promise<any> {
     return new Promise((resolve, reject) => {
       firebase.auth().signOut()
