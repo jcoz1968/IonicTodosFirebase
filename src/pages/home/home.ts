@@ -7,5 +7,16 @@ import { IonicPage, NavController } from "ionic-angular";
   templateUrl: "home.html"
 })
 export class HomePage {
-  constructor(public navCtrl: NavController) {}
+
+  constructor(public navCtrl: NavController) { }
+
+  login() {
+    this.navCtrl.push('LoginPage');
+  }
+
+  signUpUsers(): void {
+    console.log('signup');
+    this.navCtrl.push('CreateAccountPage');
+  }
+
 }
