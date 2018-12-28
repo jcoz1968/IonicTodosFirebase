@@ -1,3 +1,13 @@
-page-todo-list {
+.header { margin-top: 15px; }
+page-create-account {
 
+  .formHolder {
+    h1 {
+      text-align: center;
+    }
+
+    form .submitBtn {
+      margin-top: 40px;
+    }
+  }
 }
